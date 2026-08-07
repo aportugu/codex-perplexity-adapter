@@ -4,10 +4,10 @@
 
 # Codex–Perplexity Adapter
 
-A local service that lets the Codex CLI and compatible IDE integrations use models exposed by Perplexity's Agent API. It translates the OpenAI Responses API traffic produced by Codex into the format accepted by Perplexity.
+A local service that lets the Codex CLI, Codex app, and compatible IDE extensions use models exposed by Perplexity's Agent API. It translates the OpenAI Responses API traffic produced by Codex into the format accepted by Perplexity.
 
 ```text
-Codex CLI or IDE extension
+Codex CLI, app, or IDE extension
         │
         ▼
 Local adapter on 127.0.0.1:4000
