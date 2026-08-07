@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="icon.png" alt="Codex–Perplexity Adapter logo" width="180">
+</p>
+
 # Codex–Perplexity Adapter
 
 A local service that lets the Codex CLI and compatible IDE integrations use models exposed by Perplexity's Agent API. It translates the OpenAI Responses API traffic produced by Codex into the format accepted by Perplexity.
