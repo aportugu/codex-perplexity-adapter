@@ -25,16 +25,6 @@ The apps require macOS 13 or newer. After unzipping, move **Codex Perplexity Ada
 
 The apps are ad-hoc signed but not Apple-notarized. On first launch, macOS may require you to right-click the app, choose **Open**, and confirm.
 
-For a source installation, Python 3.10 or newer is required:
-
-```sh
-git clone https://github.com/aportugu/codex-perplexity-adapter.git
-cd codex-perplexity-adapter
-python3 -m venv .venv
-.venv/bin/pip install .
-.venv/bin/codex-perplexity-adapter --prompt-key
-```
-
 ## Configure Codex
 
 Copy the contents of [`perplexity.config.toml`](perplexity.config.toml) into `~/.codex/config.toml`, then run:
