@@ -1,0 +1,7 @@
+__pycache__
+*.pyc
+*.html
+*.log
+.git
+dist
+build

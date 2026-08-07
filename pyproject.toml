@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codex-perplexity-adapter"
+version = "0.1.0"
+description = "Standalone Responses API adapter for running Codex through Perplexity"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Andrew Portuguese"}]
+dependencies = [
+  "fastapi>=0.110,<1",
+  "httpx>=0.27,<1",
+  "uvicorn>=0.29,<1",
+]
+
+[project.urls]
+Homepage = "https://github.com/aportugu/codex-perplexity-adapter"
+Repository = "https://github.com/aportugu/codex-perplexity-adapter"
+Issues = "https://github.com/aportugu/codex-perplexity-adapter/issues"
+Releases = "https://github.com/aportugu/codex-perplexity-adapter/releases"
+
+[project.scripts]
+codex-perplexity-adapter = "codex_perplexity_adapter.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["codex_perplexity_adapter*"]

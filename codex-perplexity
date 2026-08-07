@@ -1,0 +1,6 @@
+#!/bin/zsh
+set -euo pipefail
+
+exec "/Applications/ChatGPT.app/Contents/Resources/codex" \
+  --profile perplexity \
+  "$@"
