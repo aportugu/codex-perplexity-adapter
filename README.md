@@ -42,13 +42,7 @@ experimental_bearer_token = "local-adapter-token"
 stream_idle_timeout_ms = 300000
 ```
 
-Then run Codex normally:
-
-```sh
-codex
-```
-
-The adapter must remain running while Codex is in use.
+Then start Codex using the CLI (`codex`), the Codex app, or a compatible IDE extension. The adapter must remain running while Codex is in use.
 
 ## Data handling and governance
 
