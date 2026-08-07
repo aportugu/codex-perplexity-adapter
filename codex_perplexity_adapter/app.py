@@ -238,7 +238,8 @@ async def _translate_sse(
             for other in other_lines:
                 yield f"{other}\n".encode()
             if data_lines:
-                yield f"data: {'\n'.join(data_lines)}\n\n".encode()
+                trailing_data = "\n".join(data_lines)
+                yield f"data: {trailing_data}\n\n".encode()
     finally:
         await upstream.aclose()
         await client.aclose()
