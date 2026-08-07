@@ -19,7 +19,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--model-alias", default="gpt-5.6-sol")
     parser.add_argument("--upstream-model", default="openai/gpt-5.6-sol")
     parser.add_argument("--upstream-url", default="https://api.perplexity.ai/v1/responses")
-    parser.add_argument("--local-token", default=os.getenv("ADAPTER_LOCAL_TOKEN", "local-litellm"))
+    parser.add_argument("--local-token", default=os.getenv("ADAPTER_LOCAL_TOKEN", "local-adapter-token"))
     parser.add_argument("--pid-file", help="write the running server PID to this file")
     parser.add_argument("--prompt-key", action="store_true", help="securely prompt for the Perplexity API key")
     parser.add_argument("--log-level", default="info", choices=("critical", "error", "warning", "info", "debug"))

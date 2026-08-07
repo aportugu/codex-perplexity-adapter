@@ -19,7 +19,7 @@ class Settings:
     model_alias: str = "gpt-5.6-sol"
     upstream_model: str = "openai/gpt-5.6-sol"
     upstream_url: str = "https://api.perplexity.ai/v1/responses"
-    local_token: str = "local-litellm"
+    local_token: str = "local-adapter-token"
     timeout_seconds: float = 300.0
 
 
@@ -246,7 +246,7 @@ async def _translate_sse(
 
 
 def create_app(settings: Settings, transport: httpx.AsyncBaseTransport | None = None) -> FastAPI:
-    app = FastAPI(title="Codex–Perplexity Adapter", version="0.1.0")
+    app = FastAPI(title="Codex–Perplexity Adapter", version="0.1.1")
 
     @app.get("/")
     async def root() -> dict[str, Any]:

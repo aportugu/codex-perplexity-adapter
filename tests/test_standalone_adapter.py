@@ -87,7 +87,7 @@ class AppTests(unittest.TestCase):
         with TestClient(app) as client:
             response = client.post(
                 "/v1/responses",
-                headers={"Authorization": "Bearer local-litellm"},
+                headers={"Authorization": "Bearer local-adapter-token"},
                 json={"model": "gpt-5.6-sol", "input": "hello"},
             )
         self.assertEqual(response.status_code, 200)
@@ -110,7 +110,7 @@ class AppTests(unittest.TestCase):
         with TestClient(app) as client:
             response = client.post(
                 "/v1/responses",
-                headers={"Authorization": "Bearer local-litellm"},
+                headers={"Authorization": "Bearer local-adapter-token"},
                 json={
                     "model": "gpt-5.6-sol",
                     "input": "hello",

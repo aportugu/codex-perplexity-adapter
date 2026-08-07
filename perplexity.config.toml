@@ -2,7 +2,7 @@
 name = "Perplexity Adapter"
 base_url = "http://127.0.0.1:4000/v1"
 wire_api = "responses"
-experimental_bearer_token = "local-litellm"
+experimental_bearer_token = "local-adapter-token"
 stream_idle_timeout_ms = 300000
 
 [profiles.perplexity]

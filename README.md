@@ -52,7 +52,7 @@ The prompt does not echo or save the Perplexity API key. Leave the terminal runn
 Alternatively, install the wheel from the [latest release](https://github.com/aportugu/codex-perplexity-adapter/releases/latest) with pipx:
 
 ```sh
-pipx install codex_perplexity_adapter-0.1.0-py3-none-any.whl
+pipx install codex_perplexity_adapter-0.1.1-py3-none-any.whl
 codex-perplexity-adapter --prompt-key
 ```
 
@@ -65,7 +65,7 @@ Copy the provider and profile from [`perplexity.config.toml`](perplexity.config.
 name = "Perplexity Adapter"
 base_url = "http://127.0.0.1:4000/v1"
 wire_api = "responses"
-experimental_bearer_token = "local-litellm"
+experimental_bearer_token = "local-adapter-token"
 
 [profiles.perplexity]
 model = "gpt-5.6-sol"
