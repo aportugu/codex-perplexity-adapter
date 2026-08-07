@@ -73,6 +73,7 @@ class AppTests(unittest.TestCase):
     def test_non_streaming_proxy(self):
         async def handler(request: httpx.Request) -> httpx.Response:
             sent = json.loads(request.content)
+            self.assertEqual(str(request.url), "https://api.perplexity.ai/v1/responses")
             self.assertEqual(sent["model"], "openai/gpt-5.6-sol")
             self.assertEqual(request.headers["authorization"], "Bearer perplexity-secret")
             return httpx.Response(
@@ -92,6 +93,12 @@ class AppTests(unittest.TestCase):
             )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["id"], "resp_1")
+
+    def test_api_documentation_is_disabled(self):
+        app = create_app(Settings(api_key="perplexity-secret"))
+        with TestClient(app) as client:
+            self.assertEqual(client.get("/docs").status_code, 404)
+            self.assertEqual(client.get("/openapi.json").status_code, 404)
 
     def test_streaming_custom_call_translation(self):
         async def handler(request: httpx.Request) -> httpx.Response:

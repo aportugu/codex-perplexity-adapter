@@ -183,7 +183,7 @@
 
     NSTask *task = [[NSTask alloc] init];
     task.executableURL = executable;
-    task.arguments = @[@"--host", @"127.0.0.1", @"--port", @"4000", @"--log-level", @"info",
+    task.arguments = @[@"--port", @"4000", @"--log-level", @"info",
                        @"--pid-file", self.pidURL.path];
     NSMutableDictionary *environment = [NSProcessInfo.processInfo.environment mutableCopy];
     environment[@"PERPLEXITY_API_KEY"] = apiKey;
@@ -193,11 +193,8 @@
     NSURL *logDirectory = [library URLByAppendingPathComponent:@"Logs" isDirectory:YES];
     [NSFileManager.defaultManager createDirectoryAtURL:logDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     NSURL *logURL = [logDirectory URLByAppendingPathComponent:@"Codex Perplexity Adapter.log"];
-    if (![NSFileManager.defaultManager fileExistsAtPath:logURL.path]) {
-        [NSFileManager.defaultManager createFileAtPath:logURL.path contents:nil attributes:nil];
-    }
+    [NSFileManager.defaultManager createFileAtPath:logURL.path contents:[NSData data] attributes:nil];
     NSFileHandle *logHandle = [NSFileHandle fileHandleForWritingAtPath:logURL.path];
-    [logHandle seekToEndOfFile];
     task.standardOutput = logHandle;
     task.standardError = logHandle;
 

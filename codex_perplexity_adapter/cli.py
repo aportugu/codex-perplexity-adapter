@@ -14,11 +14,9 @@ from .app import Settings, create_app
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run the Codex–Perplexity adapter")
-    parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=4000)
     parser.add_argument("--model-alias", default="gpt-5.6-sol")
     parser.add_argument("--upstream-model", default="openai/gpt-5.6-sol")
-    parser.add_argument("--upstream-url", default="https://api.perplexity.ai/v1/responses")
     parser.add_argument("--local-token", default=os.getenv("ADAPTER_LOCAL_TOKEN", "local-adapter-token"))
     parser.add_argument("--pid-file", help="write the running server PID to this file")
     parser.add_argument("--prompt-key", action="store_true", help="securely prompt for the Perplexity API key")
@@ -38,7 +36,6 @@ def main() -> None:
         api_key=api_key,
         model_alias=args.model_alias,
         upstream_model=args.upstream_model,
-        upstream_url=args.upstream_url,
         local_token=args.local_token,
     )
     pid_file = Path(args.pid_file).expanduser() if args.pid_file else None
@@ -46,7 +43,13 @@ def main() -> None:
         pid_file.parent.mkdir(parents=True, exist_ok=True)
         pid_file.write_text(str(os.getpid()), encoding="utf-8")
     try:
-        uvicorn.run(create_app(settings), host=args.host, port=args.port, log_level=args.log_level)
+        uvicorn.run(
+            create_app(settings),
+            host="127.0.0.1",
+            port=args.port,
+            log_level=args.log_level,
+            access_log=False,
+        )
     finally:
         if pid_file:
             try:

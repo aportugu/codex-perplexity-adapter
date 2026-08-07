@@ -47,10 +47,10 @@ Then start Codex using the CLI (`codex`), the Codex app, or a compatible IDE ext
 ## Data handling and governance
 
 - **Data processed:** Requests may contain prompts, instructions, conversation context, tool definitions, tool calls, and tool results supplied by Codex.
-- **External destination:** The adapter transforms this data and sends it over HTTPS to the Perplexity Agent API. The adapter itself contains no analytics or telemetry integrations.
+- **External destination:** The adapter transforms this data and sends it to the hard-coded Perplexity Agent API endpoint over HTTPS. The adapter itself contains no analytics or telemetry integrations.
 - **Credentials:** The Perplexity API key is held in the adapter process, sent only to Perplexity in the upstream authorization header, and is not saved by the application. The local bearer token authenticates communication between Codex and the adapter.
-- **Storage and logs:** The adapter has no database and does not intentionally persist request or response bodies. The macOS app writes operational and access logs to `~/Library/Logs/Codex Perplexity Adapter.log`.
-- **Network boundary:** The service listens on `127.0.0.1` by default and is not intended to be exposed to a network.
+- **Storage and logs:** The adapter has no database and does not persist request or response bodies. Access logging is disabled. The macOS app replaces its operational error log at `~/Library/Logs/Codex Perplexity Adapter.log` each time it starts.
+- **Network boundary:** The service is hard-coded to listen only on `127.0.0.1` and cannot be exposed through a command-line host option.
 - **Organizational responsibility:** Users should submit only data approved for processing by Perplexity under their organization's policies, agreements, and configured retention controls. This adapter does not alter Perplexity's processing or retention practices.
 
 ## License and project status
