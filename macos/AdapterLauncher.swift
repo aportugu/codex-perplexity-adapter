@@ -43,7 +43,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         title.font = .systemFont(ofSize: 24, weight: .semibold)
 
         let description = NSTextField(wrappingLabelWithString:
-            "Runs a private local Responses API at 127.0.0.1:4000 for Codex and Positron. Your Perplexity key stays in this process and is never saved."
+            "Runs a private local Responses API at 127.0.0.1:4000 for Codex. Your Perplexity key stays in this process and is never saved."
         )
         description.textColor = .secondaryLabelColor
 
