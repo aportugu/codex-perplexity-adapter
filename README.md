@@ -27,29 +27,28 @@ The apps are ad-hoc signed but not Apple-notarized. On first launch, macOS may r
 
 ## Configure Codex
 
-Add the following block to `~/.codex/config.toml`. If the file already contains other settings, keep them and append this block:
+Modify `~/.codex/config.toml` to include these settings. Keep any unrelated existing settings:
 
 ```toml
+model = "gpt-5.6-sol"
+model_provider = "perplexity_adapter"
+model_reasoning_effort = "medium"
+
 [model_providers.perplexity_adapter]
 name = "Perplexity Adapter"
 base_url = "http://127.0.0.1:4000/v1"
 wire_api = "responses"
 experimental_bearer_token = "local-adapter-token"
 stream_idle_timeout_ms = 300000
-
-[profiles.perplexity]
-model = "gpt-5.6-sol"
-model_provider = "perplexity_adapter"
-model_reasoning_effort = "medium"
 ```
 
-Then run:
+Then run Codex normally:
 
 ```sh
-codex --profile perplexity
+codex
 ```
 
-The adapter must remain running while the profile is in use.
+The adapter must remain running while Codex is in use.
 
 ## Data handling and governance
 
