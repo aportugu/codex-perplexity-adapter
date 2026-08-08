@@ -250,7 +250,7 @@ async def _translate_sse(
 def create_app(settings: Settings, transport: httpx.AsyncBaseTransport | None = None) -> FastAPI:
     app = FastAPI(
         title="Codex–Perplexity Adapter",
-        version="0.1.3",
+        version="0.1.4",
         docs_url=None,
         redoc_url=None,
         openapi_url=None,

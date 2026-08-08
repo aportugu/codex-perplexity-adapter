@@ -5,6 +5,8 @@ project_dir="${0:A:h}"
 pipx_venv="${HOME}/Library/Application Support/pipx/venvs/codex-perplexity-adapter"
 target_arch="${ADAPTER_TARGET_ARCH:-arm64}"
 pyinstaller="${ADAPTER_PYINSTALLER:-${pipx_venv}/bin/pyinstaller}"
+codesign_identity="${ADAPTER_CODESIGN_IDENTITY:-Developer ID Application: Andrew Portuguese (SFC29VVF27)}"
+entitlements="${project_dir}/macos/entitlements.plist"
 
 case "${target_arch}" in
   arm64)
@@ -26,6 +28,7 @@ esac
 source_icon="${project_dir}/icon.png"
 stage_dir="$(mktemp -d "/private/tmp/codex-perplexity-${target_arch}.XXXXXX")"
 app_dir="${stage_dir}/Codex Perplexity Adapter.app"
+staged_zip="${stage_dir}/${final_zip:t}"
 iconset_dir="${build_dir}/AppIcon.iconset"
 app_icon="${build_dir}/AppIcon.icns"
 trap 'rm -rf "${stage_dir}"' EXIT
@@ -88,11 +91,14 @@ cp "${app_icon}" "${app_dir}/Contents/Resources/AppIcon.icns"
 cp "${project_dir}/macos/Info.plist" "${app_dir}/Contents/Info.plist"
 chmod +x "${app_dir}/Contents/MacOS/CodexPerplexityAdapter" "${app_dir}/Contents/Resources/adapter-server"
 xattr -cr "${app_dir}"
-codesign --force --deep --sign - "${app_dir}"
+codesign --force --options runtime --timestamp --entitlements "${entitlements}" --sign "${codesign_identity}" \
+  "${app_dir}/Contents/Resources/adapter-server"
+codesign --force --options runtime --timestamp --sign "${codesign_identity}" \
+  "${app_dir}/Contents/MacOS/CodexPerplexityAdapter"
+codesign --force --options runtime --timestamp --sign "${codesign_identity}" "${app_dir}"
 codesign --verify --deep --strict "${app_dir}"
 
-ditto --norsrc --noextattr "${app_dir}" "${final_app}"
-ditto -c -k --norsrc --noextattr --keepParent "${app_dir}" "${final_zip}"
+(cd "${stage_dir}" && /usr/bin/zip -qry "${staged_zip}" "${app_dir:t}")
+mv "${staged_zip}" "${final_zip}"
 
-print "Built ${final_app}"
 print "Built ${final_zip}"

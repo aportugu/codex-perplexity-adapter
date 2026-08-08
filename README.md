@@ -27,7 +27,7 @@ Download the appropriate macOS app from the [latest release](https://github.com/
 
 The apps require macOS 13 or newer. After unzipping, move **Codex Perplexity Adapter.app** to Applications, open it, enter a Perplexity API key, and choose **Start Adapter**. Keep the app open while using Codex.
 
-The apps are ad-hoc signed but not Apple-notarized. On first launch, macOS may require you to right-click the app, choose **Open**, and confirm.
+The apps are signed with an Apple Developer ID and notarized by Apple.
 
 ## Configure Codex
 
